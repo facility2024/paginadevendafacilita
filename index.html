@@ -281,7 +281,7 @@
           <div class="play-btn">▶</div>
           <p style="color:#fff;margin-top:16px;font-size:1rem;font-weight:600;">Clique aqui para ver o vídeo</p>
         </div>
-        <video muted loop playsinline id="heroVideo" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,0.45);">
+        <video muted playsinline id="heroVideo" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,0.45);">
           <source src="https://coconudimudial.b-cdn.net/AGENCIA%20FACILITY/VSL%20SITE.mp4" type="video/mp4">
         </video>
       </div>
@@ -453,6 +453,9 @@
       v.play();
       o.style.display='none';
     }
+    document.getElementById('heroVideo').addEventListener('ended',function(){
+      document.getElementById('videoOverlay').style.display='flex';
+    });
 
     // Carousel
     let currentSlide=0;const totalSlides=3;
