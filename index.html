@@ -8,293 +8,224 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0A0E1A;
-    --panel: #111a2c;
-    --panel-2: #16213a;
-    --text: #E8ECF5;
-    --muted: #8b95ab;
-    --blue: #2F81F7;
-    --blue-dim: #1c4f9c;
-    --amber: #FFB020;
-    --amber-dim: #cc8c14;
-    --line: #223052;
-    --radius: 14px;
+    --bg:#0A0E1A;--panel:#111a2c;--panel-2:#16213a;
+    --text:#E8ECF5;--muted:#8b95ab;
+    --blue:#2F81F7;--blue-dim:#1c4f9c;
+    --amber:#FFB020;--amber-dim:#cc8c14;
+    --line:#223052;--radius:14px;
+    --cta:#F5A623;--accent:#3B82F6;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-  body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.55;
-    overflow-x: hidden;
-  }
-  h1,h2,h3{ font-family:'Sora', sans-serif; font-weight:700; letter-spacing:-0.01em;}
-  p{color: var(--muted);}
-  a{color:inherit; text-decoration:none;}
-  img{max-width:100%; display:block;}
-  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 24px;}
-  section{ padding: 88px 0; }
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.55;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Sora',sans-serif;font-weight:700;letter-spacing:-0.01em;}
+  p{color:var(--muted);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  section{padding:88px 0;}
 
-  /* ---------- SCROLL ANIMATIONS ---------- */
-  .reveal{ opacity:0; transform:translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.active{ opacity:1; transform:translateY(0); }
-  .reveal-left{ opacity:0; transform:translateX(-50px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal-left.active{ opacity:1; transform:translateX(0); }
-  .reveal-right{ opacity:0; transform:translateX(50px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal-right.active{ opacity:1; transform:translateX(0); }
-  .reveal-scale{ opacity:0; transform:scale(0.9); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal-scale.active{ opacity:1; transform:scale(1); }
+  /* ---------- PREFERS-REDUCED-MOTION ---------- */
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
+    .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important;}
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease-out,transform .6s ease-out;}
+  .reveal.active{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .6s ease-out,transform .6s ease-out;}
+  .reveal-left.active{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(40px);transition:opacity .6s ease-out,transform .6s ease-out;}
+  .reveal-right.active{opacity:1;transform:translateX(0);}
+  .reveal-scale{opacity:0;transform:scale(0.92);transition:opacity .6s ease-out,transform .6s ease-out;}
+  .reveal-scale.active{opacity:1;transform:scale(1);}
 
   /* ---------- NAV ---------- */
-  .nav{
-    position: sticky; top:0; z-index: 50;
-    background: rgba(10,14,26,0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding: 16px 24px;}
-  .logo{ font-family:'Sora'; font-weight:800; font-size: 1.15rem;}
-  .logo span{ color: var(--blue); }
-  .nav-cta{
-    background: var(--amber); color:#1a1200; font-weight:600; font-size:0.9rem;
-    padding: 10px 18px; border-radius: 999px; transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .nav-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,176,32,0.35); }
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,14,26,0.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);transition:box-shadow .3s ease,background .3s ease;}
+  .nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.4);background:rgba(10,14,26,0.95);}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .logo{font-family:'Sora';font-weight:800;font-size:1.15rem;}
+  .logo span{color:var(--blue);animation:logoPulse 4s ease-in-out infinite;}
+  @keyframes logoPulse{0%,100%{color:var(--blue);}50%{color:var(--amber);}}
+  .nav-cta{background:var(--cta);color:#1a1200;font-weight:600;font-size:.9rem;padding:10px 18px;border-radius:999px;transition:transform .15s ease,box-shadow .15s ease;}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(245,166,35,0.35);}
 
   /* ---------- HERO ---------- */
-  .hero{
-    padding: 90px 0 60px;
-    display:grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items:center;
-  }
-  .eyebrow-plain{ color: var(--blue); font-weight:600; font-size:0.95rem; margin-bottom: 18px; }
-  .hero h1{ font-size: clamp(2.1rem, 4.2vw, 3.2rem); line-height:1.12; margin-bottom:20px; }
-  .hero h1 em{ font-style:normal; color: var(--blue); }
-  .hero p.lead{ font-size: 1.08rem; max-width: 46ch; margin-bottom: 30px; }
-  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-bottom: 18px;}
-  .btn-primary{
-    background: var(--amber); color:#1a1200; font-weight:700; font-size:1rem;
-    padding: 16px 30px; border-radius: 10px; display:inline-block;
-    transition: transform .15s ease, box-shadow .15s ease;
-    box-shadow: 0 8px 24px rgba(255,176,32,0.25);
-  }
-  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255,176,32,0.4); }
-  .btn-ghost{
-    border: 1px solid var(--line); color: var(--text); padding: 15px 26px; border-radius:10px; font-weight:600;
-    transition: border-color .2s ease, background .2s ease;
-  }
-  .btn-ghost:hover{ border-color: var(--blue); background: rgba(47,129,247,0.08); }
-  .microcopy{ font-size:0.85rem; color: var(--muted); }
+  .hero{padding:90px 0 60px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .eyebrow-plain{color:var(--blue);font-weight:600;font-size:.95rem;margin-bottom:18px;}
+  .hero h1{font-size:clamp(2.1rem,4.2vw,3.2rem);line-height:1.12;margin-bottom:20px;}
+  .hero h1 em{font-style:normal;color:var(--accent);}
+  .hero h1 .line1,.hero h1 .line2{display:block;}
+  .hero h1 .line1{animation:fadeSlideUp .6s cubic-bezier(.16,1,.3,1) both;}
+  .hero h1 .line2{animation:fadeSlideUp .6s cubic-bezier(.16,1,.3,1) .1s both;}
+  @keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .hero h1 em.dono{animation:donopulse .4s cubic-bezier(.16,1,.3,1) .8s both;}
+  @keyframes donopulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+  .hero p.lead{font-size:1.08rem;max-width:46ch;margin-bottom:30px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:18px;}
+  .btn-primary{background:var(--cta);color:#1a1200;font-weight:700;font-size:1rem;padding:16px 30px;border-radius:10px;display:inline-block;transition:transform .2s ease,box-shadow .2s ease;box-shadow:0 8px 24px rgba(245,166,35,0.25);animation:btnIdle 3s ease-in-out infinite;}
+  .btn-primary:hover{transform:scale(1.03);box-shadow:0 12px 40px rgba(245,166,35,0.5);}
+  @keyframes btnIdle{0%,100%{box-shadow:0 8px 24px rgba(245,166,35,0.25);}50%{box-shadow:0 8px 32px rgba(245,166,35,0.45);}}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);padding:15px 26px;border-radius:10px;font-weight:600;position:relative;overflow:hidden;transition:border-color .2s ease;}
+  .btn-ghost::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width .3s ease;}
+  .btn-ghost:hover{border-color:var(--accent);}
+  .btn-ghost:hover::after{width:100%;}
+  .microcopy{font-size:.85rem;color:var(--muted);}
 
   /* editor mockup */
-  .editor{
-    background: var(--panel); border:1px solid var(--line); border-radius: var(--radius);
-    overflow:hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.45);
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .editor:hover{ transform: translateY(-4px); box-shadow: 0 40px 80px rgba(0,0,0,0.55); }
-  .editor-bar{
-    display:flex; align-items:center; gap:8px; padding: 12px 16px; background: var(--panel-2); border-bottom:1px solid var(--line);
-  }
-  .dot{ width:11px; height:11px; border-radius:50%; }
-  .dot.r{background:#ff5f57;} .dot.y{background:#febc2e;} .dot.g{background:#28c840;}
-  .editor-tab{ margin-left: 14px; font-family:'JetBrains Mono'; font-size:0.78rem; color: var(--muted); }
-  .editor-body{ padding: 22px 20px; font-family:'JetBrains Mono', monospace; font-size:0.86rem; color:#c7d2ea; min-height: 220px;}
-  .editor-body .c1{ color: #6b7794; }
-  .editor-body .c2{ color: var(--blue); }
-  .editor-body .c3{ color: #7ee787; }
-  .editor-body .c4{ color: var(--amber); }
-  .caret{ display:inline-block; width:8px; height:1.1em; background: var(--blue); vertical-align: middle; animation: blink 1s step-end infinite; }
-  @keyframes blink{ 50%{ opacity:0; } }
+  .editor{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,0.45);transition:transform .3s ease,box-shadow .3s ease;}
+  .editor:hover{transform:translateY(-4px);box-shadow:0 40px 80px rgba(0,0,0,0.55);}
+  .editor-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--panel-2);border-bottom:1px solid var(--line);}
+  .dot{width:11px;height:11px;border-radius:50%;transition:box-shadow .2s ease;}
+  .dot:hover{box-shadow:0 0 8px currentColor;}
+  .dot.r{background:#ff5f57;color:#ff5f57;} .dot.y{background:#febc2e;color:#febc2e;} .dot.g{background:#28c840;color:#28c840;}
+  .editor-tab{margin-left:14px;font-family:'JetBrains Mono';font-size:.78rem;color:var(--muted);}
+  .editor-body{padding:22px 20px;font-family:'JetBrains Mono',monospace;font-size:.86rem;color:#c7d2ea;min-height:220px;}
+  .editor-body .c1{color:#6b7794;} .editor-body .c2{color:var(--blue);} .editor-body .c3{color:#7ee787;} .editor-body .c4{color:var(--amber);}
+  .editor-body .line{opacity:0;}
+  .editor-body .line.typed{opacity:1;}
+  .caret{display:inline-block;width:8px;height:1.1em;background:var(--blue);vertical-align:middle;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
 
   /* ---------- SECTION HEADS ---------- */
-  .section-head{ max-width: 640px; margin-bottom: 48px; }
-  .section-head h2{ font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 14px; }
-  .section-head p{ font-size: 1.02rem; }
-  .center{ text-align:center; margin-left:auto; margin-right:auto; }
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:14px;}
+  .section-head p{font-size:1.02rem;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
 
   /* ---------- PROBLEM ---------- */
-  .problem{ background: var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-  .pain-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  .pain-card{
-    background: var(--bg); border:1px solid var(--line); border-radius: var(--radius); padding: 26px;
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-  .pain-card:hover{ transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); border-color: var(--amber); }
-  .pain-card .mark{ color: var(--amber); font-size:1.4rem; margin-bottom:12px; }
-  .pain-card h3{ font-size:1.05rem; margin-bottom: 8px; }
-  .pain-card p{ font-size: 0.93rem; }
+  .problem{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .pain-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
+  .pain-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.3);border-color:var(--amber);}
+  .pain-card .mark{color:var(--amber);font-size:1.4rem;margin-bottom:12px;}
+  .pain-card h3{font-size:1.05rem;margin-bottom:8px;}
+  .pain-card p{font-size:.93rem;}
 
   /* ---------- HOW IT WORKS ---------- */
-  .steps{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .step{
-    position:relative; padding: 30px 22px 22px; border:1px solid var(--line); border-radius: var(--radius); background: var(--panel);
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-  .step:hover{ transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); border-color: var(--blue); }
-  .step .num{ font-family:'Sora'; font-weight:800; font-size:1.6rem; color: var(--blue); margin-bottom: 14px; }
-  .step h3{ font-size:1rem; margin-bottom:8px; }
-  .step p{ font-size:0.88rem; }
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .step{position:relative;padding:30px 22px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
+  .step:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.3);border-color:var(--accent);}
+  .step .num{font-family:'Sora';font-weight:800;font-size:1.6rem;color:var(--accent);margin-bottom:14px;}
+  .step .num{opacity:0;transform:scale(0.5);transition:opacity .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1);}
+  .step.active .num{opacity:1;transform:scale(1);}
+  .step h3{font-size:1rem;margin-bottom:8px;}
+  .step p{font-size:.88rem;}
 
   /* ---------- BENEFITS ---------- */
-  .benefits{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .benefit{
-    display:flex; gap:16px; padding: 24px; border-radius: var(--radius);
-    background: linear-gradient(160deg, var(--panel), var(--panel-2));
-    border: 1px solid var(--line);
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-  .benefit:hover{ transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); border-color: var(--blue); }
-  .benefit .icon{
-    flex-shrink:0; width:42px; height:42px; border-radius:10px; background: rgba(47,129,247,0.12);
-    display:flex; align-items:center; justify-content:center; color: var(--blue); font-size:1.2rem;
-    transition: background .25s ease, transform .25s ease;
-  }
-  .benefit:hover .icon{ background: rgba(47,129,247,0.25); transform: scale(1.1); }
-  .benefit h3{ font-size:1.02rem; margin-bottom:6px; }
-  .benefit p{ font-size:0.92rem; }
+  .benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .benefit{display:flex;gap:16px;padding:24px;border-radius:var(--radius);background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
+  .benefit:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.25);border-color:var(--accent);}
+  .benefit .icon{flex-shrink:0;width:42px;height:42px;border-radius:10px;background:rgba(47,129,247,0.12);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1.2rem;transition:background .25s ease,transform .3s ease;}
+  .benefit:hover .icon{background:rgba(47,129,247,0.25);transform:rotate(5deg);}
+  .benefit h3{font-size:1.02rem;margin-bottom:6px;}
+  .benefit p{font-size:.92rem;}
 
   /* ---------- SHOWCASE ---------- */
-  .showcase{ background: var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-  .shots{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .shot{
-    aspect-ratio: 16/9; border-radius: var(--radius); border: 1px solid var(--line);
-    background: var(--bg); overflow:hidden; cursor:pointer;
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .shot:hover{ transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
-  .shot img{ width:100%; height:100%; object-fit:cover; transition: transform .4s ease; }
-  .shot:hover img{ transform: scale(1.08); }
+  .showcase{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .shot{aspect-ratio:16/9;border-radius:var(--radius);border:1px solid var(--line);background:var(--bg);overflow:hidden;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
+  .shot:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 50px rgba(0,0,0,0.4);}
+  .shot img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease,brightness .3s ease;}
+  .shot:hover img{transform:scale(1.05);brightness(1.1);}
 
   /* ---------- VSL ---------- */
-  .vsl-box{
-    background: var(--panel); border:1px solid var(--line); border-radius: var(--radius);
-    aspect-ratio: 16/9; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
-    cursor:pointer;
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .vsl-box:hover{ transform: scale(1.01); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-  .vsl-box::before{
-    content:""; position:absolute; inset:0;
-    background: radial-gradient(circle at 30% 30%, rgba(47,129,247,0.18), transparent 60%);
-  }
-  .play-btn{
-    width:78px; height:78px; border-radius:50%; background: var(--amber); color:#1a1200;
-    display:flex; align-items:center; justify-content:center; font-size:1.6rem; position:relative; z-index:2;
-    box-shadow: 0 0 0 14px rgba(255,176,32,0.12);
-    cursor:pointer;
-    transition: transform .3s ease, box-shadow .3s ease;
-  }
-  .play-btn:hover{ transform: scale(1.1); box-shadow: 0 0 0 20px rgba(255,176,32,0.2), 0 8px 30px rgba(255,176,32,0.4); }
+  .vsl-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
+  .vsl-box:hover{transform:scale(1.01);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+  .vsl-box::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(47,129,247,0.18),transparent 60%);}
+  .play-btn{width:78px;height:78px;border-radius:50%;background:var(--cta);color:#1a1200;display:flex;align-items:center;justify-content:center;font-size:1.6rem;position:relative;z-index:2;box-shadow:0 0 0 14px rgba(245,166,35,0.12);cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
+  .play-btn:hover{transform:scale(1.1);box-shadow:0 0 0 20px rgba(245,166,35,0.2),0 8px 30px rgba(245,166,35,0.4);}
 
   /* ---------- MODAL / POPUP CAROUSEL ---------- */
-  .modal-overlay{
-    display:none; position:fixed; inset:0; z-index:200;
-    background:rgba(0,0,0,0.85); backdrop-filter:blur(6px);
-    align-items:center; justify-content:center;
-    opacity:0; transition: opacity .3s ease;
-  }
-  .modal-overlay.show{ display:flex; opacity:1; }
-  .modal{
-    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
-    max-width:900px; width:90%; position:relative; overflow:hidden;
-    transform:scale(0.9); transition: transform .3s ease;
-  }
-  .modal-overlay.show .modal{ transform:scale(1); }
-  .modal-close{
-    position:absolute; top:16px; right:16px; z-index:10;
-    width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
-    background:var(--bg); color:var(--text); font-size:1.2rem; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    transition: background .2s ease;
-  }
-  .modal-close:hover{ background:var(--panel-2); }
-  .carousel{ position:relative; overflow:hidden; }
-  .carousel-track{ display:flex; transition: transform .5s cubic-bezier(.25,.8,.25,1); }
-  .carousel-slide{ min-width:100%; }
-  .carousel-slide img{ width:100%; aspect-ratio:16/9; object-fit:cover; }
-  .carousel-btn{
-    position:absolute; top:50%; transform:translateY(-50%); z-index:5;
-    width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
-    background:rgba(10,14,26,0.8); color:var(--text); font-size:1.2rem; cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    transition: background .2s ease;
-  }
-  .carousel-btn:hover{ background:var(--blue); color:#fff; }
-  .carousel-btn.prev{ left:12px; }
-  .carousel-btn.next{ right:12px; }
-  .carousel-dots{ display:flex; justify-content:center; gap:8px; padding:16px; }
-  .carousel-dot{
-    width:10px; height:10px; border-radius:50%; background:var(--line); border:none; cursor:pointer;
-    transition: background .2s ease, transform .2s ease;
-  }
-  .carousel-dot.active{ background:var(--amber); transform:scale(1.3); }
+  .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;opacity:0;transition:opacity .3s ease;}
+  .modal-overlay.show{display:flex;opacity:1;}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);max-width:900px;width:90%;position:relative;overflow:hidden;transform:scale(0.9);transition:transform .3s cubic-bezier(.16,1,.3,1);}
+  .modal-overlay.show .modal{transform:scale(1);}
+  .modal-close{position:absolute;top:16px;right:16px;z-index:10;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease;}
+  .modal-close:hover{background:var(--panel-2);}
+  .carousel{position:relative;overflow:hidden;}
+  .carousel-track{display:flex;transition:transform .5s cubic-bezier(.25,.8,.25,1);}
+  .carousel-slide{min-width:100%;}
+  .carousel-slide img{width:100%;aspect-ratio:16/9;object-fit:cover;}
+  .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(10,14,26,0.8);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease;}
+  .carousel-btn:hover{background:var(--accent);color:#fff;}
+  .carousel-btn.prev{left:12px;}
+  .carousel-btn.next{right:12px;}
+  .carousel-dots{display:flex;justify-content:center;gap:8px;padding:16px;}
+  .carousel-dot{width:10px;height:10px;border-radius:50%;background:var(--line);border:none;cursor:pointer;transition:background .2s ease,transform .2s ease;}
+  .carousel-dot.active{background:var(--amber);transform:scale(1.3);}
 
   /* ---------- COMMUNITY ---------- */
-  .community{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items:center; }
-  .community ul{ list-style:none; margin-top: 20px; }
-  .community li{ padding: 10px 0 10px 28px; position:relative; border-bottom: 1px solid var(--line); font-size:0.96rem; color: var(--text); transition: padding .2s ease; }
-  .community li:hover{ padding-left: 34px; }
-  .community li::before{ content:"→"; position:absolute; left:0; color: var(--blue); transition: color .2s ease; }
-  .community li:hover::before{ color: var(--amber); }
-  .community-card{
-    background: var(--panel); border:1px solid var(--line); border-radius: var(--radius); padding: 30px;
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-  .community-card:hover{ transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
-  .community-card h3{ margin-bottom: 6px; }
-  .community-card .price{ font-family:'Sora'; font-size:2.2rem; font-weight:800; color: var(--amber); margin: 14px 0 4px; }
-  .community-card .price small{ font-size:0.95rem; color: var(--muted); font-weight:500; }
+  .community{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .community ul{list-style:none;margin-top:20px;}
+  .community li{padding:10px 0 10px 28px;position:relative;border-bottom:1px solid var(--line);font-size:.96rem;color:var(--text);transition:padding .2s ease;}
+  .community li:hover{padding-left:34px;}
+  .community li::before{content:"→";position:absolute;left:0;color:var(--blue);transition:color .2s ease;}
+  .community li:hover::before{color:var(--amber);}
+  .community-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .25s ease,box-shadow .25s ease;}
+  .community-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3);}
+  .community-card h3{margin-bottom:6px;}
+  .community-card .price{font-family:'Sora';font-size:2.2rem;font-weight:800;color:var(--amber);margin:14px 0 4px;}
+  .community-card .price small{font-size:.95rem;color:var(--muted);font-weight:500;}
 
   /* ---------- FAQ ---------- */
-  .faq-item{ border-bottom: 1px solid var(--line); padding: 20px 0; }
-  .faq-item summary{ cursor:pointer; font-weight:600; font-size:1rem; list-style:none; display:flex; justify-content:space-between; align-items:center; transition: color .2s ease; }
-  .faq-item summary:hover{ color: var(--blue); }
-  .faq-item summary::-webkit-details-marker{ display:none; }
-  .faq-item summary::after{ content:"+"; color: var(--blue); font-size:1.4rem; transition: transform .3s ease; }
-  .faq-item[open] summary::after{ content:"–"; transform:rotate(180deg); }
-  .faq-item p{ margin-top: 12px; font-size:0.94rem; }
+  .faq-item{border-bottom:1px solid var(--line);padding:20px 0;}
+  .faq-item summary{cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;transition:color .2s ease;}
+  .faq-item summary:hover{color:var(--accent);}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";color:var(--accent);font-size:1.4rem;transition:transform .25s ease;}
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  .faq-item p{margin-top:12px;font-size:.94rem;}
 
   /* ---------- FINAL CTA ---------- */
-  .final-cta{
-    text-align:center; background: linear-gradient(160deg, var(--panel-2), var(--bg));
-    border-top: 1px solid var(--line);
-  }
-  .final-cta h2{ font-size: clamp(1.7rem, 3.4vw, 2.4rem); max-width: 720px; margin: 0 auto 16px; }
-  .final-cta p{ max-width: 560px; margin: 0 auto 30px; }
+  .final-cta{text-align:center;border-top:1px solid var(--line);position:relative;overflow:hidden;}
+  .final-cta::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--panel-2),var(--bg),var(--panel-2));background-size:200% 200%;animation:gradientShift 15s ease infinite;}
+  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  .final-cta .wrap{position:relative;z-index:1;}
+  .final-cta h2{font-size:clamp(1.7rem,3.4vw,2.4rem);max-width:720px;margin:0 auto 16px;}
+  .final-cta p{max-width:560px;margin:0 auto 30px;}
 
-  footer{ padding: 40px 0; text-align:center; border-top:1px solid var(--line); }
-  footer p{ font-size:0.82rem; }
+  footer{padding:40px 0;text-align:center;border-top:1px solid var(--line);}
+  footer p{font-size:.82rem;}
 
-  @media (max-width: 900px){
-    .hero{ grid-template-columns: 1fr; padding-top: 50px; gap: 30px; }
-    .hero .wrap{ padding: 0 16px; }
-    .hero h1{ font-size: 1.8rem; }
-    .hero p.lead{ font-size: 0.95rem; }
-    .pain-grid, .steps, .shots{ grid-template-columns: 1fr 1fr; }
-    .benefits, .community{ grid-template-columns: 1fr; }
-    .section-head{ padding: 0 8px; }
+  /* ---------- IMAGEM KEN BURNS ---------- */
+  .ken-burns{animation:kenBurns 8s ease-out both;}
+  @keyframes kenBurns{from{transform:scale(1.05);}to{transform:scale(1);}}
+
+  /* ---------- FLOAT ---------- */
+  .float-badge{animation:floatBadge 3s ease-in-out infinite;}
+  @keyframes floatBadge{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;padding-top:50px;gap:30px;}
+    .hero .wrap{padding:0 16px;}
+    .hero h1{font-size:1.8rem;}
+    .hero p.lead{font-size:.95rem;}
+    .pain-grid,.steps,.shots{grid-template-columns:1fr 1fr;}
+    .benefits,.community{grid-template-columns:1fr;}
+    .section-head{padding:0 8px;}
   }
-  @media (max-width: 560px){
-    .pain-grid, .steps, .shots{ grid-template-columns: 1fr; }
-    section{ padding: 60px 0; }
-    .hero{ padding: 40px 0 30px; }
-    .hero h1{ font-size: 1.5rem; }
-    .hero p.lead{ font-size: 0.9rem; max-width: 100%; }
-    .cta-row{ flex-direction: column; align-items: stretch; }
-    .btn-primary, .btn-ghost{ width: 100%; text-align: center; }
-    .wrap{ padding: 0 16px; }
-    .editor-body{ font-size: 0.75rem; padding: 14px 12px; min-height: 160px; }
-    .section-head h2{ font-size: 1.3rem; }
-    .benefit{ flex-direction: column; align-items: flex-start; }
-    .community{ gap: 24px; }
-    .community-card .price{ font-size: 1.8rem; }
+  @media(max-width:560px){
+    .pain-grid,.steps,.shots{grid-template-columns:1fr;}
+    section{padding:60px 0;}
+    .hero{padding:40px 0 30px;}
+    .hero h1{font-size:1.5rem;}
+    .hero p.lead{font-size:.9rem;max-width:100%;}
+    .cta-row{flex-direction:column;align-items:stretch;}
+    .btn-primary,.btn-ghost{width:100%;text-align:center;}
+    .wrap{padding:0 16px;}
+    .editor-body{font-size:.75rem;padding:14px 12px;min-height:160px;}
+    .section-head h2{font-size:1.3rem;}
+    .benefit{flex-direction:column;align-items:flex-start;}
+    .community{gap:24px;}
+    .community-card .price{font-size:1.8rem;}
   }
 </style>
 </head>
 <body>
 
-  <nav class="nav">
+  <nav class="nav" id="navbar">
     <div class="wrap">
       <div class="logo">FALITA<span>.</span></div>
       <a href="#oferta" class="nav-cta">Quero começar</a>
@@ -305,26 +236,29 @@
     <div class="wrap" style="display:contents;">
       <div>
         <div class="eyebrow-plain reveal">VS Code + IA, sem mensalidade</div>
-        <h1 class="reveal">Pare de alugar código.<br><em>Comece a ser dono</em> dele.</h1>
-        <p class="lead reveal">Chega de plataforma que trava seu projeto, cobra por crédito e te entrega um código que nenhum time de TI consegue ler. Aprenda a construir sistemas reais, com código limpo, direto no VS Code — gratuito.</p>
-        <div class="cta-row reveal">
+        <h1>
+          <span class="line1">Pare de alugar código.</span>
+          <span class="line2"><em class="dono">Comece a ser dono</em> dele.</span>
+        </h1>
+        <p class="lead reveal" style="animation:fadeSlideUp .6s cubic-bezier(.16,1,.3,1) .2s both;">Chega de plataforma que trava seu projeto, cobra por crédito e te entrega um código que nenhum time de TI consegue ler. Aprenda a construir sistemas reais, com código limpo, direto no VS Code — gratuito.</p>
+        <div class="cta-row reveal" style="animation:fadeSlideUp .6s cubic-bezier(.16,1,.3,1) .3s both;">
           <a href="#oferta" class="btn-primary">Quero minha vaga</a>
           <a href="#como-funciona" class="btn-ghost">Ver como funciona</a>
         </div>
-        <p class="microcopy reveal">Sem cartão salvo em plataforma nenhuma. O projeto fica com você, no seu GitHub.</p>
+        <p class="microcopy reveal" style="animation:fadeSlideUp .6s cubic-bezier(.16,1,.3,1) .4s both;">Sem cartão salvo em plataforma nenhuma. O projeto fica com você, no seu GitHub.</p>
       </div>
       <div class="editor reveal-right">
         <div class="editor-bar">
           <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
           <span class="editor-tab">projeto-cliente.tsx</span>
         </div>
-        <div class="editor-body">
-<span class="c1">// gerado com prompt, sem vendor lock-in</span><br>
-<span class="c2">function</span> <span class="c3">CheckoutFlow</span>() {<br>
-&nbsp;&nbsp;<span class="c1">// código limpo, legível por qualquer dev</span><br>
-&nbsp;&nbsp;<span class="c2">const</span> [status, setStatus] = useState(<span class="c4">"idle"</span>);<br>
-&nbsp;&nbsp;<span class="c2">return</span> &lt;<span class="c3">Payment</span> onConfirm={setStatus} /&gt;;<br>
-}<span class="caret"></span>
+        <div class="editor-body" id="typewriter">
+          <div class="line" data-delay="0"><span class="c1">// gerado com prompt, sem vendor lock-in</span></div>
+          <div class="line" data-delay="400"><span class="c2">function</span> <span class="c3">CheckoutFlow</span>() {</div>
+          <div class="line" data-delay="800">&nbsp;&nbsp;<span class="c1">// código limpo, legível por qualquer dev</span></div>
+          <div class="line" data-delay="1200">&nbsp;&nbsp;<span class="c2">const</span> [status, setStatus] = useState(<span class="c4">"idle"</span>);</div>
+          <div class="line" data-delay="1600">&nbsp;&nbsp;<span class="c2">return</span> &lt;<span class="c3">Payment</span> onConfirm={setStatus} /&gt;;</div>
+          <div class="line" data-delay="2000">}<span class="caret"></span></div>
         </div>
       </div>
     </div>
@@ -333,26 +267,14 @@
   <section class="problem">
     <div class="wrap">
       <div class="section-head center reveal">
-        <img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/Gemini_Generated_Image_hk3419hk3419hk34.jpg" alt="Problema no-code" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius); border:1px solid var(--line); margin:0 auto 24px;">
+        <img class="ken-burns" src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/Gemini_Generated_Image_hk3419hk3419hk34.jpg" alt="Problema no-code" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);border:1px solid var(--line);margin:0 auto 24px;">
         <h2>Se você já tentou montar um app antes, reconhece isso</h2>
         <p>A maioria das plataformas "no-code" resolve o problema errado: elas escondem o código de você, em vez de te ensinar a dominar ele.</p>
       </div>
       <div class="pain-grid">
-        <div class="pain-card reveal" style="transition-delay:0.1s">
-          <div class="mark">✕</div>
-          <h3>Créditos que acabam</h3>
-          <p>Você paga, gasta o crédito no meio do projeto e trava — justo quando o cliente está esperando a entrega.</p>
-        </div>
-        <div class="pain-card reveal" style="transition-delay:0.2s">
-          <div class="mark">✕</div>
-          <h3>Extensões que quebram</h3>
-          <p>Funciona hoje, para de funcionar amanhã. Seu projeto depende de uma decisão que não é sua.</p>
-        </div>
-        <div class="pain-card reveal" style="transition-delay:0.3s">
-          <div class="mark">✕</div>
-          <h3>Código que ninguém entende</h3>
-          <p>Quando o time de TI do cliente olha o projeto, não reconhece nada — e isso custa credibilidade.</p>
-        </div>
+        <div class="pain-card reveal" style="transition-delay:.1s"><div class="mark">✕</div><h3>Créditos que acabam</h3><p>Você paga, gasta o crédito no meio do projeto e trava — justo quando o cliente está esperando a entrega.</p></div>
+        <div class="pain-card reveal" style="transition-delay:.2s"><div class="mark">✕</div><h3>Extensões que quebram</h3><p>Funciona hoje, para de funcionar amanhã. Seu projeto depende de uma decisão que não é sua.</p></div>
+        <div class="pain-card reveal" style="transition-delay:.3s"><div class="mark">✕</div><h3>Código que ninguém entende</h3><p>Quando o time de TI do cliente olha o projeto, não reconhece nada — e isso custa credibilidade.</p></div>
       </div>
     </div>
   </section>
@@ -360,85 +282,46 @@
   <section id="como-funciona">
     <div class="wrap">
       <div class="section-head center reveal">
-        <img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/COMERCIA%20FINAL%20IMAGEM.jpg" alt="Como funciona" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:var(--radius); border:1px solid var(--line); margin:0 auto 24px;">
+        <img class="ken-burns" src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/COMERCIA%20FINAL%20IMAGEM.jpg" alt="Como funciona" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);border:1px solid var(--line);margin:0 auto 24px;">
         <h2>Como funciona, do zero à publicação</h2>
         <p>Quatro passos, todos rodando nas suas próprias contas — nada fica preso em uma plataforma de terceiros.</p>
       </div>
       <div class="steps">
-        <div class="step reveal" style="transition-delay:0.1s">
-          <div class="num">1</div>
-          <h3>Conecte suas contas</h3>
-          <p>GitHub e Supabase gratuitos. Leva minutos e o projeto já nasce sendo seu.</p>
-        </div>
-        <div class="step reveal" style="transition-delay:0.2s">
-          <div class="num">2</div>
-          <h3>Descreva o que quer construir</h3>
-          <p>Um prompt bem estruturado guia a IA no VS Code a gerar o sistema completo.</p>
-        </div>
-        <div class="step reveal" style="transition-delay:0.3s">
-          <div class="num">3</div>
-          <h3>Revise o código gerado</h3>
-          <p>Limpo, comentado e organizado — dá pra entender, ajustar e evoluir.</p>
-        </div>
-        <div class="step reveal" style="transition-delay:0.4s">
-          <div class="num">4</div>
-          <h3>Publique e entregue</h3>
-          <p>Deploy direto do seu ambiente. O cliente recebe um sistema, não uma dependência.</p>
-        </div>
+        <div class="step reveal" style="transition-delay:.1s"><div class="num">1</div><h3>Conecte suas contas</h3><p>GitHub e Supabase gratuitos. Leva minutos e o projeto já nasce sendo seu.</p></div>
+        <div class="step reveal" style="transition-delay:.2s"><div class="num">2</div><h3>Descreva o que quer construir</h3><p>Um prompt bem estruturado guia a IA no VS Code a gerar o sistema completo.</p></div>
+        <div class="step reveal" style="transition-delay:.3s"><div class="num">3</div><h3>Revise o código gerado</h3><p>Limpo, comentado e organizado — dá pra entender, ajustar e evoluir.</p></div>
+        <div class="step reveal" style="transition-delay:.4s"><div class="num">4</div><h3>Publique e entregue</h3><p>Deploy direto do seu ambiente. O cliente recebe um sistema, não uma dependência.</p></div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="section-head reveal">
-        <h2>O que muda na prática</h2>
-        <p>Menos plataforma no meio do caminho, mais controle sobre o que você constrói.</p>
-      </div>
+      <div class="section-head reveal"><h2>O que muda na prática</h2><p>Menos plataforma no meio do caminho, mais controle sobre o que você constrói.</p></div>
       <div class="benefits">
-        <div class="benefit reveal" style="transition-delay:0.1s">
-          <div class="icon">◆</div>
-          <div><h3>Zero mensalidade obrigatória</h3><p>VS Code é gratuito. Você só paga pelo que realmente decidir escalar, quando decidir.</p></div>
-        </div>
-        <div class="benefit reveal" style="transition-delay:0.2s">
-          <div class="icon">◆</div>
-          <div><h3>Seu código, seu repositório</h3><p>Tudo versionado no seu GitHub. Se quiser trocar de ferramenta amanhã, o projeto vai com você.</p></div>
-        </div>
-        <div class="benefit reveal" style="transition-delay:0.3s">
-          <div class="icon">◆</div>
-          <div><h3>Código que um time de TI entende</h3><p>Estrutura organizada e legível, do jeito que facilita manutenção e gera confiança em reunião.</p></div>
-        </div>
-        <div class="benefit reveal" style="transition-delay:0.4s">
-          <div class="icon">◆</div>
-          <div><h3>Você aprende enquanto constrói</h3><p>Cada prompt vem com explicação do que foi gerado — você evolui de verdade, não só copia e cola.</p></div>
-        </div>
+        <div class="benefit reveal" style="transition-delay:.1s"><div class="icon">◆</div><div><h3>Zero mensalidade obrigatória</h3><p>VS Code é gratuito. Você só paga pelo que realmente decidir escalar, quando decidir.</p></div></div>
+        <div class="benefit reveal" style="transition-delay:.2s"><div class="icon">◆</div><div><h3>Seu código, seu repositório</h3><p>Tudo versionado no seu GitHub. Se quiser trocar de ferramenta amanhã, o projeto vai com você.</p></div></div>
+        <div class="benefit reveal" style="transition-delay:.3s"><div class="icon">◆</div><div><h3>Código que um time de TI entende</h3><p>Estrutura organizada e legível, do jeito que facilita manutenção e gera confiança em reunião.</p></div></div>
+        <div class="benefit reveal" style="transition-delay:.4s"><div class="icon">◆</div><div><h3>Você aprende enquanto constrói</h3><p>Cada prompt vem com explicação do que foi gerado — você evolui de verdade, não só copia e cola.</p></div></div>
       </div>
     </div>
   </section>
 
   <section class="showcase">
     <div class="wrap">
-      <div class="section-head center reveal">
-        <h2>Veja o visual real do seu VS Code</h2>
-        <p>Sua ferramenta poderosa, sem custo e sem aluguel.</p>
-      </div>
+      <div class="section-head center reveal"><h2>Veja o visual real do seu VS Code</h2><p>Sua ferramenta poderosa, sem custo e sem aluguel.</p></div>
       <div class="shots">
-        <div class="shot reveal" style="transition-delay:0.1s" onclick="openCarousel(0)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/INICIO.jpeg" alt="Início"></div>
-        <div class="shot reveal" style="transition-delay:0.2s" onclick="openCarousel(1)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Criação"></div>
-        <div class="shot reveal" style="transition-delay:0.3s" onclick="openCarousel(2)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Finalização"></div>
+        <div class="shot reveal" style="transition-delay:.1s" onclick="openCarousel(0)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/INICIO.jpeg" alt="Início"></div>
+        <div class="shot reveal" style="transition-delay:.2s" onclick="openCarousel(1)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Criação"></div>
+        <div class="shot reveal" style="transition-delay:.3s" onclick="openCarousel(2)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Finalização"></div>
       </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <div class="section-head center reveal">
-        <h2>Assista antes de decidir</h2>
-        <p>Em poucos minutos, veja o processo completo rodando do zero.</p>
-      </div>
-      <div class="vsl-box reveal-scale" onclick="openCarousel(0)">
-        <div class="play-btn">▶</div>
-      </div>
+      <div class="section-head center reveal"><h2>Assista antes de decidir</h2><p>Em poucos minutos, veja o processo completo rodando do zero.</p></div>
+      <div class="vsl-box reveal-scale" onclick="openCarousel(0)"><div class="play-btn">▶</div></div>
     </div>
   </section>
 
@@ -459,7 +342,7 @@
           <h3>Acesso à comunidade</h3>
           <p>Pagamento único, sem mensalidade.</p>
           <div class="price">R$ XXX <small>/ acesso único</small></div>
-          <a href="#" class="btn-primary" style="width:100%; text-align:center; margin-top:10px;">Garantir minha vaga</a>
+          <a href="#" class="btn-primary" style="width:100%;text-align:center;margin-top:10px;">Garantir minha vaga</a>
           <p class="microcopy" style="margin-top:14px;">Turmas com número limitado de vagas por vez, para manter o suporte próximo.</p>
         </div>
       </div>
@@ -468,43 +351,25 @@
 
   <section>
     <div class="wrap">
-      <div class="section-head center reveal">
-        <h2>Perguntas frequentes</h2>
-      </div>
+      <div class="section-head center reveal"><h2>Perguntas frequentes</h2></div>
       <div class="faqs">
-        <details class="faq-item reveal" style="transition-delay:0.1s">
-          <summary>Preciso saber programar para começar?</summary>
-          <p>Não é obrigatório já saber, mas o método ensina você a ler e entender o código gerado — o objetivo é que você evolua de verdade, não apenas dependa da IA.</p>
-        </details>
-        <details class="faq-item reveal" style="transition-delay:0.15s">
-          <summary>Isso substitui contratar um desenvolvedor?</summary>
-          <p>Para projetos simples e médios, sim, você consegue construir sozinho. Para sistemas muito complexos, ter apoio técnico continua sendo recomendado.</p>
-        </details>
-        <details class="faq-item reveal" style="transition-delay:0.2s">
-          <summary>O VS Code e as ferramentas são realmente gratuitos?</summary>
-          <p>O VS Code, o GitHub e o Supabase têm planos gratuitos generosos para começar. Custos podem surgir apenas se o seu projeto crescer muito em uso.</p>
-        </details>
-        <details class="faq-item reveal" style="transition-delay:0.25s">
-          <summary>Como funciona o suporte no Telegram?</summary>
-          <p>Você entra num grupo fechado onde pode postar dúvidas e receber orientação de membros mais experientes da comunidade.</p>
-        </details>
+        <details class="faq-item reveal" style="transition-delay:.1s"><summary>Preciso saber programar para começar?</summary><p>Não é obrigatório já saber, mas o método ensina você a ler e entender o código gerado — o objetivo é que você evolua de verdade, não apenas dependa da IA.</p></details>
+        <details class="faq-item reveal" style="transition-delay:.15s"><summary>Isso substitui contratar um desenvolvedor?</summary><p>Para projetos simples e médios, sim, você consegue construir sozinho. Para sistemas muito complexos, ter apoio técnico continua sendo recomendado.</p></details>
+        <details class="faq-item reveal" style="transition-delay:.2s"><summary>O VS Code e as ferramentas são realmente gratuitos?</summary><p>O VS Code, o GitHub e o Supabase têm planos gratuitos generosos para começar. Custos podem surgir apenas se o seu projeto crescer muito em uso.</p></details>
+        <details class="faq-item reveal" style="transition-delay:.25s"><summary>Como funciona o suporte no Telegram?</summary><p>Você entra num grupo fechado onde pode postar dúvidas e receber orientação de membros mais experientes da comunidade.</p></details>
       </div>
     </div>
   </section>
 
   <section class="final-cta">
-    <div class="wrap reveal">
+    <div class="wrap reveal-scale">
       <h2>Seu próximo projeto pode ser seu, do início ao fim</h2>
       <p>Sem crédito que acaba, sem extensão que quebra, sem código que ninguém além da plataforma entende.</p>
       <a href="#oferta" class="btn-primary">Quero começar agora</a>
     </div>
   </section>
 
-  <footer>
-    <div class="wrap">
-      <p>FALITA — construído com VS Code. Este material é educacional; resultados dependem do seu esforço e prática.</p>
-    </div>
-  </footer>
+  <footer><div class="wrap"><p>FALITA — construído com VS Code. Este material é educacional; resultados dependem do seu esforço e prática.</p></div></footer>
 
   <!-- MODAL CAROUSEL -->
   <div class="modal-overlay" id="modalCarousel">
@@ -528,59 +393,53 @@
   </div>
 
   <script>
-    // Scroll reveal animations
-    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
+    // Scroll reveal - once per session
+    const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');observer.unobserve(e.target);}});
+    },{threshold:0.2,rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el=>observer.observe(el));
+
+    // Step numbers scale-in
+    const stepEls = document.querySelectorAll('.step');
+    const stepObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');stepObs.unobserve(e.target);}});
+    },{threshold:0.3});
+    stepEls.forEach(el=>stepObs.observe(el));
+
+    // Navbar scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll',()=>{
+      nav.classList.toggle('scrolled',window.scrollY>50);
+    },{passive:true});
+
+    // Typewriter effect
+    const twLines = document.querySelectorAll('#typewriter .line');
+    let twDone = false;
+    const twObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !twDone){
+          twDone=true;
+          twLines.forEach((line,i)=>{
+            setTimeout(()=>{line.classList.add('typed');},parseInt(line.dataset.delay));
+          });
         }
       });
-    }, { threshold: 0.15 });
-    revealElements.forEach(el => observer.observe(el));
+    },{threshold:0.5});
+    twObs.observe(document.getElementById('typewriter'));
 
     // Carousel
-    let currentSlide = 0;
-    const totalSlides = 3;
-
-    function openCarousel(index) {
-      currentSlide = index;
-      updateCarousel();
-      document.getElementById('modalCarousel').classList.add('show');
-      document.body.style.overflow = 'hidden';
+    let currentSlide=0;const totalSlides=3;
+    function openCarousel(i){currentSlide=i;updateCarousel();document.getElementById('modalCarousel').classList.add('show');document.body.style.overflow='hidden';}
+    function closeCarousel(){document.getElementById('modalCarousel').classList.remove('show');document.body.style.overflow='';}
+    function moveCarousel(d){currentSlide=(currentSlide+d+totalSlides)%totalSlides;updateCarousel();}
+    function goToSlide(i){currentSlide=i;updateCarousel();}
+    function updateCarousel(){
+      document.getElementById('carouselTrack').style.transform=`translateX(-${currentSlide*100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((d,i)=>{d.classList.toggle('active',i===currentSlide);});
     }
-
-    function closeCarousel() {
-      document.getElementById('modalCarousel').classList.remove('show');
-      document.body.style.overflow = '';
-    }
-
-    function moveCarousel(dir) {
-      currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
-      updateCarousel();
-    }
-
-    function goToSlide(index) {
-      currentSlide = index;
-      updateCarousel();
-    }
-
-    function updateCarousel() {
-      document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
-      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
-
-    // Close modal on overlay click
-    document.getElementById('modalCarousel').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeCarousel();
-    });
-
-    // Close modal on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeCarousel();
-    });
+    document.getElementById('modalCarousel').addEventListener('click',e=>{if(e.target===e.currentTarget)closeCarousel();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCarousel();});
   </script>
 
 </body>
