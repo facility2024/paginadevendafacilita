@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FALITA — Programe de verdade, sem pagar por créditos</title>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -111,13 +108,12 @@
   .pain-card h3{ font-size:1.05rem; margin-bottom: 8px; }
   .pain-card p{ font-size: 0.93rem; }
 
-  /* ---------- HOW IT WORKS (sequence, numbers justified) ---------- */
+  /* ---------- HOW IT WORKS ---------- */
   .steps{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .step{ position:relative; padding: 30px 22px 22px; border:1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
   .step .num{ font-family:'Sora'; font-weight:800; font-size:1.6rem; color: var(--blue); margin-bottom: 14px; }
   .step h3{ font-size:1rem; margin-bottom:8px; }
   .step p{ font-size:0.88rem; }
-  .step-arrow{ display:none; }
 
   /* ---------- BENEFITS ---------- */
   .benefits{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -133,14 +129,14 @@
   .benefit h3{ font-size:1.02rem; margin-bottom:6px; }
   .benefit p{ font-size:0.92rem; }
 
-  /* ---------- IMAGE SHOWCASE (placeholders) ---------- */
+  /* ---------- SHOWCASE ---------- */
   .showcase{ background: var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
   .shots{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .shot{
     aspect-ratio: 16/9; border-radius: var(--radius); border: 1px solid var(--line);
-    background: var(--bg);
-    overflow:hidden;
+    background: var(--bg); overflow:hidden;
   }
+  .shot img{ width:100%; height:100%; object-fit:cover; }
 
   /* ---------- VSL ---------- */
   .vsl-box{
@@ -330,9 +326,9 @@
         <p>Sua ferramenta poderosa, sem custo e sem aluguel.</p>
       </div>
       <div class="shots">
-        <div class="shot" style="aspect-ratio:16/9;"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/INICIO.jpeg" alt="Início" style="width:100%; height:100%; object-fit:cover; border-radius:14px;"></div>
-        <div class="shot" style="aspect-ratio:16/9;"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Criação" style="width:100%; height:100%; object-fit:cover; border-radius:14px;"></div>
-        <div class="shot" style="aspect-ratio:16/9;"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Finalização" style="width:100%; height:100%; object-fit:cover; border-radius:14px;"></div>
+        <div class="shot"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/INICIO.jpeg" alt="Início"></div>
+        <div class="shot"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Criação"></div>
+        <div class="shot"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Finalização"></div>
       </div>
     </div>
   </section>
