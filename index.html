@@ -137,12 +137,10 @@
   .showcase{ background: var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
   .shots{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .shot{
-    aspect-ratio: 4/3; border-radius: var(--radius); border: 1.5px dashed var(--blue-dim);
+    aspect-ratio: 16/9; border-radius: var(--radius); border: 1px solid var(--line);
     background: var(--bg);
-    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;
-    color: var(--muted); font-size:0.85rem; text-align:center; padding: 16px;
+    overflow:hidden;
   }
-  .shot .plus{ font-size:1.6rem; color: var(--blue); }
 
   /* ---------- VSL ---------- */
   .vsl-box{
