@@ -154,6 +154,11 @@
   .shot img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease,brightness .3s ease;}
   .shot:hover img{transform:scale(1.05);brightness(1.1);}
 
+  /* ---------- HERO VIDEO ---------- */
+  .hero-video{position:relative;}
+  .video-toggle{position:absolute;bottom:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(10,14,26,0.8);color:var(--text);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease;z-index:5;}
+  .video-toggle:hover{background:var(--accent);}
+
   /* ---------- VSL ---------- */
   .vsl-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
   .vsl-box:hover{transform:scale(1.01);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
@@ -271,19 +276,14 @@
         </div>
         <p class="microcopy reveal" style="animation:fadeSlideUp .6s cubic-bezier(.16,1,.3,1) .4s both;">Sem cartão salvo em plataforma nenhuma. O projeto fica com você, no seu GitHub.</p>
       </div>
-      <div class="editor reveal-right">
-        <div class="editor-bar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          <span class="editor-tab">projeto-cliente.tsx</span>
-        </div>
-        <div class="editor-body" id="typewriter">
-          <div class="line" data-delay="0"><span class="c1">// gerado com prompt, sem vendor lock-in</span></div>
-          <div class="line" data-delay="400"><span class="c2">function</span> <span class="c3">CheckoutFlow</span>() {</div>
-          <div class="line" data-delay="800">&nbsp;&nbsp;<span class="c1">// código limpo, legível por qualquer dev</span></div>
-          <div class="line" data-delay="1200">&nbsp;&nbsp;<span class="c2">const</span> [status, setStatus] = useState(<span class="c4">"idle"</span>);</div>
-          <div class="line" data-delay="1600">&nbsp;&nbsp;<span class="c2">return</span> &lt;<span class="c3">Payment</span> onConfirm={setStatus} /&gt;;</div>
-          <div class="line" data-delay="2000">}<span class="caret"></span></div>
-        </div>
+      <div class="hero-video reveal-right">
+        <video autoplay muted loop playsinline id="heroVideo" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,0.45);">
+          <source src="https://coconudimudial.b-cdn.net/AGENCIA%20FACILITY/VSL%20SITE.mp4" type="video/mp4">
+        </video>
+        <button class="video-toggle" id="videoToggle" onclick="toggleVideo()" title="Pausar/Reproduzir">
+          <span id="pauseIcon">⏸</span>
+          <span id="playIcon" style="display:none;">▶</span>
+        </button>
       </div>
     </div>
   </header>
@@ -339,13 +339,6 @@
         <div class="shot reveal" style="transition-delay:.2s" onclick="openCarousel(1)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Criação"></div>
         <div class="shot reveal" style="transition-delay:.3s" onclick="openCarousel(2)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Finalização"></div>
       </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="section-head center reveal"><h2>Assista antes de decidir</h2><p>Em poucos minutos, veja o processo completo rodando do zero.</p></div>
-      <div class="vsl-box reveal-scale" onclick="openCarousel(0)"><div class="play-btn">▶</div></div>
     </div>
   </section>
 
@@ -451,6 +444,15 @@
       });
     },{threshold:0.5});
     twObs.observe(document.getElementById('typewriter'));
+
+    // Video toggle
+    function toggleVideo(){
+      const v=document.getElementById('heroVideo');
+      const p=document.getElementById('pauseIcon');
+      const pl=document.getElementById('playIcon');
+      if(v.paused){v.play();p.style.display='';pl.style.display='none';}
+      else{v.pause();p.style.display='none';pl.style.display='';}
+    }
 
     // Carousel
     let currentSlide=0;const totalSlides=3;
