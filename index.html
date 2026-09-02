@@ -452,7 +452,9 @@
     },{threshold:0.5});
     twObs.observe(document.getElementById('typewriter'));
 
-    // Video toggle
+    // Video - ativar áudio automaticamente após 1s
+    const heroVideo = document.getElementById('heroVideo');
+    setTimeout(()=>{heroVideo.muted=false;document.getElementById('muteIcon').style.display='none';document.getElementById('unmuteIcon').style.display='';},1000);
     function toggleVideo(){
       const v=document.getElementById('heroVideo');
       const p=document.getElementById('pauseIcon');
