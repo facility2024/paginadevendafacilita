@@ -156,7 +156,8 @@
 
   /* ---------- HERO VIDEO ---------- */
   .hero-video{position:relative;}
-  .video-toggle{position:absolute;bottom:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(10,14,26,0.8);color:var(--text);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease;z-index:5;}
+  .video-controls{position:absolute;bottom:16px;right:16px;display:flex;gap:8px;}
+  .video-toggle{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(10,14,26,0.8);color:var(--text);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease;}
   .video-toggle:hover{background:var(--accent);}
 
   /* ---------- VSL ---------- */
@@ -280,10 +281,16 @@
         <video autoplay muted loop playsinline id="heroVideo" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,0.45);">
           <source src="https://coconudimudial.b-cdn.net/AGENCIA%20FACILITY/VSL%20SITE.mp4" type="video/mp4">
         </video>
-        <button class="video-toggle" id="videoToggle" onclick="toggleVideo()" title="Pausar/Reproduzir">
-          <span id="pauseIcon">⏸</span>
-          <span id="playIcon" style="display:none;">▶</span>
-        </button>
+        <div class="video-controls">
+          <button class="video-toggle" onclick="toggleVideo()" title="Pausar/Reproduzir">
+            <span id="pauseIcon">⏸</span>
+            <span id="playIcon" style="display:none;">▶</span>
+          </button>
+          <button class="video-toggle" onclick="toggleMute()" title="Ativar/Desativar som">
+            <span id="muteIcon">🔇</span>
+            <span id="unmuteIcon" style="display:none;">🔊</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -452,6 +459,14 @@
       const pl=document.getElementById('playIcon');
       if(v.paused){v.play();p.style.display='';pl.style.display='none';}
       else{v.pause();p.style.display='none';pl.style.display='';}
+    }
+    function toggleMute(){
+      const v=document.getElementById('heroVideo');
+      const m=document.getElementById('muteIcon');
+      const um=document.getElementById('unmuteIcon');
+      v.muted=!v.muted;
+      if(v.muted){m.style.display='';um.style.display='none';}
+      else{m.style.display='none';um.style.display='';}
     }
 
     // Carousel
