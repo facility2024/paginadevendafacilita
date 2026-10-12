@@ -138,6 +138,9 @@
   .bonus-cta{font-family:'Sora';font-weight:700;font-size:1.08rem!important;color:var(--blue)!important;}
   .bonus-cta strong{color:var(--blue);}
   .bonus-final{margin-top:18px!important;padding-top:16px;border-top:1px solid var(--line);font-family:'Sora';font-weight:700;text-align:center;color:var(--amber)!important;}
+  .bonus-btn-wrap{text-align:center;margin-top:22px;}
+  .bonus-btn{font-family:'Sora';font-weight:800;letter-spacing:0.03em;animation:bonusPulse 1.6s ease-in-out infinite;}
+  @keyframes bonusPulse{0%,100%{transform:scale(1);box-shadow:0 8px 24px rgba(245,166,35,0.25);}50%{transform:scale(1.06);box-shadow:0 0 0 18px rgba(245,166,35,0.12),0 12px 36px rgba(245,166,35,0.5);}}
 
   /* ---------- HOW IT WORKS ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
@@ -326,6 +329,7 @@
           <p>Você pode pegar qualquer um desses produtos e transformá-lo em uma fonte de renda, vendendo como <strong>assinatura mensal</strong> ou oferecendo como um <strong>sistema personalizado para cada cliente</strong>, com a sua marca!</p>
           <p>💰 Você não precisa começar do zero. Já terá sistemas prontos para personalizar, comercializar e transformar em novas oportunidades de faturamento.</p>
           <p class="bonus-final">🚀 <strong>Clique agora, assista ao vídeo e descubra como começar a faturar com seus próprios sistemas!</strong></p>
+          <div class="bonus-btn-wrap"><a href="#" class="btn-primary bonus-btn" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});playVideo();">VER VÍDEOS DOS BÔNUS</a></div>
         </div>
       </div>
     </div>
