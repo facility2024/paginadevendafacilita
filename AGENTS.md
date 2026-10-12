@@ -19,7 +19,7 @@
 
 - **Assets são hotlinks externos** (`COCONUDIMUDIAL.b-cdn.net`): imagens, poster e vídeo da VSL não estão no repo. URLs quebradas/renomeadas no CDN derrubam o visual — não "mova" nem regenere assets sem confirmar origem.
 - **Bug conhecido**: o script falha em `twObs.observe(document.getElementById('typewriter'))` — o elemento `#typewriter` não existe. Isso interrompe o `<script>` e impede o `addEventListener('ended')` do hero video de ser registrado (o `onclick="playVideo()"` continua funcionando por hoisting). Ao editar o bloco de script, preserve/contorne essa ordem.
-- **Placeholders intencionais**: preço `R$ XXX` e CTAs com `href="#"` ainda não foram preenchidos. Não invente valores/URLs de pagamento.
+- **Placeholders**: preço da comunidade = `R$ 297,00` (preenchido); CTA de pagamento ainda aponta `href="#"` — não invente URL de checkout.
 - SEO/OG/JSON-LD vivem no `<head>` do mesmo arquivo; mantenha sincronizados se mudar título/oferta.
 
 ## Convenções
