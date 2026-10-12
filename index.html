@@ -184,6 +184,8 @@
   /* ---------- MODAL / POPUP CAROUSEL ---------- */
   .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;opacity:0;transition:opacity .3s ease;}
   .modal-overlay.show{display:flex;opacity:1;}
+  .modal.lightbox{max-width:1280px;width:94%;background:#000;padding:10px;}
+  .modal.lightbox img{width:100%;max-height:720px;aspect-ratio:16/9;object-fit:contain;display:block;}
   .modal{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);max-width:900px;width:90%;position:relative;overflow:hidden;transform:scale(0.9);transition:transform .3s cubic-bezier(.16,1,.3,1);}
   .modal-overlay.show .modal{transform:scale(1);}
   .modal-close{position:absolute;top:16px;right:16px;z-index:10;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease;}
@@ -367,9 +369,9 @@
     <div class="wrap">
       <div class="section-head center reveal"><h2>Veja o visual real do seu VS Code</h2><p>Sua ferramenta poderosa, sem custo e sem aluguel.</p></div>
       <div class="shots">
-        <div class="shot reveal" style="transition-delay:.1s" onclick="openCarousel(0)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/INICIO.jpeg" alt="Início"></div>
-        <div class="shot reveal" style="transition-delay:.2s" onclick="openCarousel(1)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Criação"></div>
-        <div class="shot reveal" style="transition-delay:.3s" onclick="openCarousel(2)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Finalização"></div>
+        <div class="shot reveal" style="transition-delay:.1s" onclick="openLightbox(this.querySelector('img').src,this.querySelector('img').alt)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/INICIO.jpeg" alt="Início"></div>
+        <div class="shot reveal" style="transition-delay:.2s" onclick="openLightbox(this.querySelector('img').src,this.querySelector('img').alt)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Criação"></div>
+        <div class="shot reveal" style="transition-delay:.3s" onclick="openLightbox(this.querySelector('img').src,this.querySelector('img').alt)"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Finalização"></div>
       </div>
     </div>
   </section>
@@ -420,24 +422,11 @@
 
   <footer><div class="wrap"><p>FALITA — construído com VS Code. Este material é educacional; resultados dependem do seu esforço e prática.</p></div></footer>
 
-  <!-- MODAL CAROUSEL -->
+  <!-- LIGHTBOX POPUP -->
   <div class="modal-overlay" id="modalCarousel">
-    <div class="modal">
+    <div class="modal lightbox">
       <button class="modal-close" onclick="closeCarousel()">✕</button>
-      <div class="carousel">
-        <div class="carousel-track" id="carouselTrack">
-          <div class="carousel-slide"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/INICIO.jpeg" alt="Slide 1"></div>
-          <div class="carousel-slide"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/CRA%C3%87AO.jpeg" alt="Slide 2"></div>
-          <div class="carousel-slide"><img src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/FINALIZA%C3%87AO.jpeg" alt="Slide 3"></div>
-        </div>
-        <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
-        <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
-      </div>
-      <div class="carousel-dots" id="carouselDots">
-        <button class="carousel-dot active" onclick="goToSlide(0)"></button>
-        <button class="carousel-dot" onclick="goToSlide(1)"></button>
-        <button class="carousel-dot" onclick="goToSlide(2)"></button>
-      </div>
+      <img id="lightboxImg" src="" alt="">
     </div>
   </div>
 
@@ -489,16 +478,9 @@
       document.getElementById('videoOverlay').style.display='flex';
     });
 
-    // Carousel
-    let currentSlide=0;const totalSlides=3;
-    function openCarousel(i){currentSlide=i;updateCarousel();document.getElementById('modalCarousel').classList.add('show');document.body.style.overflow='hidden';}
-    function closeCarousel(){document.getElementById('modalCarousel').classList.remove('show');document.body.style.overflow='';}
-    function moveCarousel(d){currentSlide=(currentSlide+d+totalSlides)%totalSlides;updateCarousel();}
-    function goToSlide(i){currentSlide=i;updateCarousel();}
-    function updateCarousel(){
-      document.getElementById('carouselTrack').style.transform=`translateX(-${currentSlide*100}%)`;
-      document.querySelectorAll('.carousel-dot').forEach((d,i)=>{d.classList.toggle('active',i===currentSlide);});
-    }
+    // Lightbox
+    function openLightbox(src,alt){var img=document.getElementById('lightboxImg');img.src=src;img.alt=alt||'';document.getElementById('modalCarousel').classList.add('show');document.body.style.overflow='hidden';}
+    function closeCarousel(){document.getElementById('modalCarousel').classList.remove('show');document.body.style.overflow='';document.getElementById('lightboxImg').src='';}
     document.getElementById('modalCarousel').addEventListener('click',e=>{if(e.target===e.currentTarget)closeCarousel();});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCarousel();});
   </script>
