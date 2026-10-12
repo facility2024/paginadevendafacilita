@@ -127,6 +127,17 @@
   .pain-card h3{font-size:1.05rem;margin-bottom:8px;}
   .pain-card p{font-size:.93rem;}
   .bonus-banner{margin:40px auto 0;max-width:720px;text-align:center;padding:22px 28px;border-radius:var(--radius);border:1px solid var(--amber);background:linear-gradient(135deg,rgba(245,166,35,0.16),rgba(255,176,32,0.06));font-family:'Sora';font-weight:800;font-size:clamp(1rem,2.2vw,1.35rem);color:var(--amber);letter-spacing:0.02em;box-shadow:0 0 34px rgba(245,166,35,0.22);}
+  .bonus-offer{max-width:760px;margin:28px auto 0;}
+  .bonus-img-link{display:block;border-radius:var(--radius);overflow:hidden;border:2px solid var(--amber);box-shadow:0 12px 40px rgba(245,166,35,0.25);transition:transform .25s ease,box-shadow .25s ease;}
+  .bonus-img-link:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 18px 50px rgba(245,166,35,0.4);}
+  .bonus-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;cursor:pointer;}
+  .bonus-copy{margin-top:22px;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:28px 26px;}
+  .bonus-copy p{margin-bottom:14px;font-size:.98rem;color:var(--text);}
+  .bonus-copy p:last-child{margin-bottom:0;}
+  .bonus-copy strong{color:var(--amber);}
+  .bonus-cta{font-family:'Sora';font-weight:700;font-size:1.08rem!important;color:var(--blue)!important;}
+  .bonus-cta strong{color:var(--blue);}
+  .bonus-final{margin-top:18px!important;padding-top:16px;border-top:1px solid var(--line);font-family:'Sora';font-weight:700;text-align:center;color:var(--amber)!important;}
 
   /* ---------- HOW IT WORKS ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
@@ -302,6 +313,21 @@
         <div class="pain-card reveal" style="transition-delay:.3s"><div class="mark">✕</div><h3>Código que ninguém entende</h3><p>Quando o time de TI do cliente olha o projeto, não reconhece nada — e isso custa credibilidade.</p></div>
       </div>
       <div class="bonus-banner reveal-scale">BÔNUS QUE JÁ VAI FAZER VOCÊ FATURAR NA PRIMEIRA VENDA</div>
+      <div class="bonus-offer reveal">
+        <a href="#" class="bonus-img-link" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});playVideo();">
+          <img class="bonus-img" src="https://COCONUDIMUDIAL.b-cdn.net/AGENCIA%20FACILITY/COMERCIA%20FINAL%20IMAGEM.jpg" alt="Clique aqui e assista ao vídeo dos arquivos que você terá acesso">
+        </a>
+        <div class="bonus-copy">
+          <p class="bonus-cta">🚀 <strong>CLIQUE AQUI E ASSISTA AO VÍDEO!</strong></p>
+          <p>Veja todos os arquivos e sistemas que você terá acesso para utilizar na sua plataforma. Você receberá <strong>100% do acesso aos sistemas em arquivos ZIP</strong>, prontos para serem usados, personalizados e modelados com a sua própria marca!</p>
+          <p class="bonus-cta">🔥 <strong>E TEM MAIS! TODOS OS SISTEMAS POSSUEM PAINEL ADMINISTRATIVO!</strong></p>
+          <p>Isso mesmo! Você poderá gerenciar e vender suas próprias licenças, criando novas oportunidades de negócio e aumentando seu faturamento.</p>
+          <p class="bonus-cta">🤯 <strong>IMAGINA SÓ! QUE INCRÍVEL!</strong></p>
+          <p>Você pode pegar qualquer um desses produtos e transformá-lo em uma fonte de renda, vendendo como <strong>assinatura mensal</strong> ou oferecendo como um <strong>sistema personalizado para cada cliente</strong>, com a sua marca!</p>
+          <p>💰 Você não precisa começar do zero. Já terá sistemas prontos para personalizar, comercializar e transformar em novas oportunidades de faturamento.</p>
+          <p class="bonus-final">🚀 <strong>Clique agora, assista ao vídeo e descubra como começar a faturar com seus próprios sistemas!</strong></p>
+        </div>
+      </div>
     </div>
   </section>
 
