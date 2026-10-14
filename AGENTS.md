@@ -10,7 +10,8 @@
 
 ## Repo shape
 
-- Site estático de venda (FALITA, pt-BR) em **um único `index.html`**: todo CSS e JS estão inline. Não há package.json, build, lint, testes ou CI.
+- Site estático de venda (FALITA, pt-BR) em **um único `index.html`** (~36 KB): todo CSS e JS estão inline. Não há build, lint, testes ou CI.
+- `package.json` existe apenas como devDependency do CLI `supabase` (sem scripts; `package.json`, `package-lock.json` e `node_modules/` estão untracked no git e não fazem parte do deploy). Não há diretório `supabase/` nem `.env`.
 - `Dockerfile` = `nginx:alpine` copiando `index.html` para `/usr/share/nginx/html`.
   - Build/run: `docker build -t falita .` && `docker run -p 8080:80 falita`
   - Dev local: abrir `index.html` direto ou qualquer servidor estático (ex.: `npx serve .`).
@@ -18,8 +19,9 @@
 ## Gotchas
 
 - **Assets são hotlinks externos** (`COCONUDIMUDIAL.b-cdn.net`): imagens, poster e vídeo da VSL não estão no repo. URLs quebradas/renomeadas no CDN derrubam o visual — não "mova" nem regenere assets sem confirmar origem.
-- **Bug conhecido**: o script falha em `twObs.observe(document.getElementById('typewriter'))` — o elemento `#typewriter` não existe. Isso interrompe o `<script>` e impede o `addEventListener('ended')` do hero video de ser registrado (o `onclick="playVideo()"` continua funcionando por hoisting). Ao editar o bloco de script, preserve/contorne essa ordem.
-- **Placeholders**: preço da comunidade = `R$ 297,00` (preenchido); CTA de pagamento ainda aponta `href="#"` — não invente URL de checkout.
+- **Bug conhecido (confirmado)**: o script falha em `twObs.observe(document.getElementById('typewriter'))` (`index.html:469`) — o elemento `#typewriter` não existe no HTML. Isso interrompe o `<script>` e impede o `addEventListener('ended')` do hero video de ser registrado (o `onclick="playVideo()"` continua funcionando por hoisting). Ao editar o bloco de script, preserve/contorne essa ordem.
+- **Checkout**: CTA "Garantir minha vaga" aponta para `https://pay.kiwify.com.br/TJvEFrx`. Os `href="#"` restantes são CTAs intencionais de play de vídeo/bônus — não troque nenhuma dessas URLs sem pedido explícito.
+- Preço da comunidade: `R$ 297,00` (preenchido).
 - SEO/OG/JSON-LD vivem no `<head>` do mesmo arquivo; mantenha sincronizados se mudar título/oferta.
 
 ## Convenções
