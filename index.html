@@ -144,6 +144,20 @@
   .bonus-btn{font-family:'Sora';font-weight:800;letter-spacing:0.03em;animation:bonusPulse 1.6s ease-in-out infinite;}
   @keyframes bonusPulse{0%,100%{transform:scale(1);box-shadow:0 8px 24px rgba(245,166,35,0.25);}50%{transform:scale(1.06);box-shadow:0 0 0 18px rgba(245,166,35,0.12),0 12px 36px rgba(245,166,35,0.5);}}
 
+  .video-list{display:grid;grid-template-columns:1fr;gap:18px;margin-top:28px;}
+  .video-card{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px;display:flex;align-items:center;gap:14px;cursor:pointer;text-align:left;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
+  .video-card:hover{transform:translateY(-3px);border-color:var(--amber);box-shadow:0 18px 40px rgba(0,0,0,0.28);}
+  .video-thumb{position:relative;flex:0 0 180px;width:180px;height:101px;border:none;border-radius:10px;overflow:hidden;background:#000;cursor:pointer;display:block;}
+  .video-thumb video{width:100%;height:100%;object-fit:cover;display:block;}
+  .video-thumb::after{content:'▶';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;background:rgba(0,0,0,0.18);text-shadow:0 4px 14px rgba(0,0,0,0.75);} 
+  .video-info{flex:1;min-width:0;}
+  .video-info h3{font-size:1rem;margin-bottom:8px;color:var(--text);}
+  .video-info p{font-size:.88rem;color:var(--muted);line-height:1.5;}
+
+  .video-modal .modal{max-width:980px;width:min(92vw,980px);background:#000;border:0;padding:0;overflow:hidden;}
+  .video-modal .modal-close{top:14px;right:14px;background:rgba(0,0,0,0.65);border-color:rgba(255,255,255,0.2);}
+  .video-modal video{display:block;width:100%;height:auto;max-height:80vh;aspect-ratio:16/9;object-fit:contain;background:#000;}
+
   /* ---------- HOW IT WORKS ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
   .step{position:relative;padding:30px 22px 22px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
@@ -270,6 +284,10 @@
     .benefit{flex-direction:column;align-items:flex-start;}
     .community{gap:24px;}
     .community-card .price{font-size:1.8rem;}
+    .video-card{flex-direction:column;align-items:flex-start;padding:10px;}
+    .video-thumb{width:100%;flex-basis:100%;height:auto;aspect-ratio:16/9;}
+    .video-info{width:100%;}
+    .video-info h3{font-size:.95rem;}
   }
 </style>
 </head>
@@ -324,7 +342,7 @@
       <div class="bonus-banner reveal-scale">BÔNUS QUE JÁ VAI FAZER VOCÊ FATURAR NA PRIMEIRA VENDA</div>
       <div class="bonus-offer reveal">
         <a href="#" class="bonus-img-link" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});playVideo();">
-          <img class="bonus-img" src="https://coconudimudial.b-cdn.net/AGENCIA%20FACILITY/P%C3%B4ster%20Promocional%20Extra%20B%C3%B4nus.png" alt="Clique aqui e assista ao vídeo dos arquivos que você terá acesso">
+          <img class="bonus-img" src="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/B%C3%B4nus%20SAS_%20Economize%20R%24%2021.500%2C00.png" alt="Clique aqui e assista ao vídeo dos arquivos que você terá acesso">
         </a>
         <div class="bonus-copy">
           <p class="bonus-cta">🚀 <strong>CLIQUE AQUI E ASSISTA AO VÍDEO!</strong></p>
@@ -335,8 +353,48 @@
           <p>Você pode pegar qualquer um desses produtos e transformá-lo em uma fonte de renda, vendendo como <strong>assinatura mensal</strong> ou oferecendo como um <strong>sistema personalizado para cada cliente</strong>, com a sua marca!</p>
           <p>💰 Você não precisa começar do zero. Já terá sistemas prontos para personalizar, comercializar e transformar em novas oportunidades de faturamento.</p>
           <p class="bonus-final">🚀 <strong>Clique agora, assista ao vídeo e descubra como começar a faturar com seus próprios sistemas!</strong></p>
-          <div class="bonus-btn-wrap"><a href="#" class="btn-primary bonus-btn" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});playVideo();">VER VÍDEOS DOS BÔNUS</a></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="videos-bonus">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <h2>Vídeos dos bônus</h2>
+        <p>Todos disponíveis em uma lista responsiva, com visual limpo para mobile e abertura em popup ao clicar.</p>
+      </div>
+
+      <div class="video-list">
+        <button class="video-card reveal" type="button" data-video-url="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/APRESENTA%C3%87AO%20LIVE.mp4" data-video-title="Apresentação live">
+          <span class="video-thumb"><video muted playsinline preload="metadata" src="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/APRESENTA%C3%87AO%20LIVE.mp4"></video></span>
+          <span class="video-info"><h3>Apresentação Live</h3><p>Veja a visão geral da apresentação e do fluxo do material.</p></span>
+        </button>
+
+        <button class="video-card reveal" type="button" data-video-url="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/DELIVERY.mp4" data-video-title="Delivery">
+          <span class="video-thumb"><video muted playsinline preload="metadata" src="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/DELIVERY.mp4"></video></span>
+          <span class="video-info"><h3>Delivery</h3><p>Entenda como esse fluxo funciona na prática e como entregar valor.</p></span>
+        </button>
+
+        <button class="video-card reveal" type="button" data-video-url="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/FINANCEIRO.mp4" data-video-title="Financeiro">
+          <span class="video-thumb"><video muted playsinline preload="metadata" src="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/FINANCEIRO.mp4"></video></span>
+          <span class="video-info"><h3>Financeiro</h3><p>Confira como organizar e potencializar a parte financeira do projeto.</p></span>
+        </button>
+
+        <button class="video-card reveal" type="button" data-video-url="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/JOGO%20DE%20BOTAO%20.mp4" data-video-title="Jogo de Botão">
+          <span class="video-thumb"><video muted playsinline preload="metadata" src="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/JOGO%20DE%20BOTAO%20.mp4"></video></span>
+          <span class="video-info"><h3>Jogo de Botão</h3><p>Uma demonstração rápida de interação e fluxo no sistema.</p></span>
+        </button>
+
+        <button class="video-card reveal" type="button" data-video-url="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/LIVE.mp4" data-video-title="Live">
+          <span class="video-thumb"><video muted playsinline preload="metadata" src="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/LIVE.mp4"></video></span>
+          <span class="video-info"><h3>Live</h3><p>Uma visão direta do conteúdo em formato de live e apresentação.</p></span>
+        </button>
+
+        <button class="video-card reveal" type="button" data-video-url="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/SMS.mp4" data-video-title="SMS">
+          <span class="video-thumb"><video muted playsinline preload="metadata" src="https://coconudimudial.b-cdn.net/VIDEOS%20ANUNCIO%20TUTORIAIS/SMS.mp4"></video></span>
+          <span class="video-info"><h3>SMS</h3><p>Veja a demonstração que mostra essa funcionalidade do material.</p></span>
+        </button>
       </div>
     </div>
   </section>
@@ -434,6 +492,15 @@
     </div>
   </div>
 
+  <div class="modal-overlay video-modal" id="videoModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeVideoModal()" aria-label="Fechar vídeo">✕</button>
+      <video id="videoModalPlayer" controls playsinline preload="auto">
+        <source id="videoModalSource" src="" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
   <script>
     // Scroll reveal - once per session
     const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
@@ -456,37 +523,76 @@
     },{passive:true});
 
     // Typewriter effect
-    const twLines = document.querySelectorAll('#typewriter .line');
-    let twDone = false;
-    const twObs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting && !twDone){
-          twDone=true;
-          twLines.forEach((line,i)=>{
-            setTimeout(()=>{line.classList.add('typed');},parseInt(line.dataset.delay));
-          });
-        }
-      });
-    },{threshold:0.5});
-    twObs.observe(document.getElementById('typewriter'));
+    const typewriterEl = document.getElementById('typewriter');
+    if (typewriterEl) {
+      const twLines = typewriterEl.querySelectorAll('.line');
+      let twDone = false;
+      const twObs = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting && !twDone){
+            twDone=true;
+            twLines.forEach((line)=>{
+              setTimeout(()=>{line.classList.add('typed');},parseInt(line.dataset.delay || '0'));
+            });
+          }
+        });
+      },{threshold:0.5});
+      twObs.observe(typewriterEl);
+    }
 
     // Video
     function playVideo(){
       var v=document.getElementById('heroVideo');
       var o=document.getElementById('videoOverlay');
+      if (!v || !o) return;
       v.muted=false;
       v.play();
       o.style.display='none';
     }
-    document.getElementById('heroVideo').addEventListener('ended',function(){
-      document.getElementById('videoOverlay').style.display='flex';
-    });
+    const heroVideo = document.getElementById('heroVideo');
+    if (heroVideo) {
+      heroVideo.addEventListener('ended',function(){
+        const o=document.getElementById('videoOverlay');
+        if (o) o.style.display='flex';
+      });
+    }
 
     // Lightbox
     function openLightbox(src,alt){var img=document.getElementById('lightboxImg');img.src=src;img.alt=alt||'';document.getElementById('modalCarousel').classList.add('show');document.body.style.overflow='hidden';}
     function closeCarousel(){document.getElementById('modalCarousel').classList.remove('show');document.body.style.overflow='';document.getElementById('lightboxImg').src='';}
     document.getElementById('modalCarousel').addEventListener('click',e=>{if(e.target===e.currentTarget)closeCarousel();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCarousel();});
+
+    function openVideoModal(src, title){
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('videoModalPlayer');
+      const source = document.getElementById('videoModalSource');
+      if (!modal || !video || !source) return;
+      source.src = src;
+      video.load();
+      modal.classList.add('show');
+      document.body.style.overflow='hidden';
+    }
+
+    function closeVideoModal(){
+      const modal = document.getElementById('videoModal');
+      const video = document.getElementById('videoModalPlayer');
+      const source = document.getElementById('videoModalSource');
+      if (!modal || !video || !source) return;
+      video.pause();
+      source.src = '';
+      video.load();
+      modal.classList.remove('show');
+      document.body.style.overflow='';
+    }
+
+    document.querySelectorAll('[data-video-url]').forEach((card)=>{
+      card.addEventListener('click',()=>{
+        openVideoModal(card.dataset.videoUrl, card.dataset.videoTitle || 'Vídeo');
+      });
+    });
+
+    document.getElementById('videoModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeVideoModal();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCarousel();closeVideoModal();}});
   </script>
 
 </body>
